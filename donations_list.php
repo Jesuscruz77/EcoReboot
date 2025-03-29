@@ -41,13 +41,17 @@
       </div>
 
       <!-- Botones de exportación -->
+      <!-- En la sección de botones de exportación -->
       <div class="mb-3">
-        <button class="btn btn-success" onclick="exportPDF()">
-          <i class="bi bi-file-pdf"></i> Exportar PDF
-        </button>
-        <button class="btn btn-success" onclick="exportExcel()">
-          <i class="bi bi-file-spreadsheet"></i> Exportar Excel
-        </button>
+          <button class="btn btn-success" onclick="exportPDF()">
+              <i class="bi bi-file-pdf"></i> Exportar PDF
+          </button>
+          <button class="btn btn-success" onclick="exportExcel()">
+              <i class="bi bi-file-spreadsheet"></i> Exportar Excel
+          </button>
+          <a href="api_docs.html" target="_blank" class="btn btn-info">
+              <i class="bi bi-code-square"></i> Ver API Docs
+          </a>
       </div>
 
       <?php

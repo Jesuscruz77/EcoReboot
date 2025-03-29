@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: API de Donaciones - EcoReboot
+  version: 1.0.0
+servers:
+  - url: http://localhost/Ecoreboot/api/donations
+    description: Servidor local de desarrollo
+
+paths:
+  /get.php:
+    get:
+      summary: Obtener todas las donaciones
+      responses:
+        '200':
+          description: Lista de donaciones
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DonacionesResponse'
+
+  /get_one.php:
+    get:
+      summary: Obtener una donación por ID
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Donación encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DonacionResponse'
+        '404':
+          description: Donación no encontrada
+
+  /post.php:
+    post:
+      summary: Crear nueva donación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DonacionInput'
+      responses:
+        '201':
+          description: Donación creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperacionResponse'
+
+    /put.php:
+    put:
+      summary: Actualizar una donación
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DonacionInput'
+      responses:
+        '200':
+          description: Donación actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperacionResponse'
+
+  /delete.php:
+    delete:
+      summary: Eliminar una donación
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Donación eliminada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperacionResponse'
+        '404':
+          description: Donación no encontrada
+
+components:
+  schemas:
+    DonacionInput:
+      type: object
+      properties:
+        id_usuario:
+          type: integer
+          example: 1
+        id_tipo_electrodomestico:
+          type: integer
+          example: 2
+        id_estado_dispositivo:
+          type: integer
+          example: 3
+        fecha:
+          type: string
+          format: date
+          example: "2023-08-15"
+        imperfecciones:
+          type: string
+          example: "Rayón pequeño"
+        telefono:
+          type: string
+          example: "555-1234"
+        total_dispositivos:
+          type: integer
+          example: 1
+      required:
+        - id_usuario
+        - id_tipo_electrodomestico
+        - id_estado_dispositivo
+        - fecha
+        - total_dispositivos
+
+    DonacionUpdate:
+      allOf:
+        - $ref: '#/components/schemas/DonacionInput'
+        - type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+          required:
+            - id
+
+    DonacionesResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Donacion'
+
+    DonacionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          $ref: '#/components/schemas/Donacion'
+
+    OperacionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        affected_rows:
+          type: integer
+          example: 1
+        id:
+          type: integer
+          example: 5
+
+    Donacion:
+      type: object
+      properties:
+        id_donacion:
+          type: integer
+          example: 1
+        id_usuario:
+          type: integer
+          example: 1
+        id_tipo_electrodomestico:
+          type: integer
+          example: 2
+        id_estado_dispositivo:
+          type: integer
+          example: 3
+        fecha:
+          type: string
+          format: date
+          example: "2023-08-15"
+        imperfecciones:
+          type: string
+          example: "Rayón pequeño"
+        telefono:
+          type: string
+          example: "555-1234"
+        total_dispositivos:
+          type: integer
+          example: 1

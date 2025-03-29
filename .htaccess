@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /Ecoreboot/
+
+    # API routes - direct and simple
+    RewriteRule ^api/donaciones/?$ api/donaciones.php [L,QSA]
+    RewriteRule ^api/donaciones/([0-9]+)/?$ api/donaciones.php?id=$1 [L,QSA]
+</IfModule>
+
+# Configure CORS headers
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# Enable YAML MIME type
+<IfModule mod_mime.c>
+    AddType application/x-yaml .yaml
+    AddType text/yaml .yaml
+</IfModule>
