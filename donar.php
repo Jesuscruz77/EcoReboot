@@ -335,7 +335,7 @@
                 <select class="form-control" name="tipo_dispositivo" id="tipo_dispositivo" required>
                   <?php
                   include 'db.php';
-                  $result = $conn->query("SELECT id_tipo_electrodomestico, nombre FROM Tipo_Electrodomestico");
+                  $result = $conn->query("SELECT id_tipo_electrodomestico, nombre FROM tipo_electrodomestico");
                   while ($row = $result->fetch_assoc()) {
                       echo '<option value="'.$row['id_tipo_electrodomestico'].'">'.$row['nombre'].'</option>';
                   }
@@ -347,7 +347,7 @@
                 <label for="tipo_condicion"><i class="bi bi-clipboard-check me-2"></i>Estado del dispositivo</label>
                 <select class="form-control" name="tipo_condicion" id="tipo_condicion" required>
                   <?php
-                  $result = $conn->query("SELECT id_estado_dispositivo, nombre FROM Estado_Dispositivo");
+                  $result = $conn->query("SELECT id_estado_dispositivo, nombre FROM estado_dispositivo");
                   while ($row = $result->fetch_assoc()) {
                       echo '<option value="'.$row['id_estado_dispositivo'].'">'.$row['nombre'].'</option>';
                   }

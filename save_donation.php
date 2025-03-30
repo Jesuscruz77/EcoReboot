@@ -16,14 +16,14 @@ $telefono = mysqli_real_escape_string($conn, $_POST['telefono']);
 $cantidad = mysqli_real_escape_string($conn, $_POST['cantidad']);
 
 // Obtener el último id de la tabla Donaciones
-$result = $conn->query("SELECT MAX(id_donacion) AS last_id FROM Donaciones");
+$result = $conn->query("SELECT MAX(id_donacion) AS last_id FROM donaciones");
 $row = $result->fetch_assoc();
 $last_id = $row['last_id'];
 
 // Incrementar el id para la nueva inserción
 $new_id = $last_id + 1;
 
-$sql = "INSERT INTO Donaciones (id_donacion, id_usuario, id_tipo_electrodomestico, id_estado_dispositivo, fecha, imperfecciones, telefono, total_dispositivos) 
+$sql = "INSERT INTO donaciones (id_donacion, id_usuario, id_tipo_electrodomestico, id_estado_dispositivo, fecha, imperfecciones, telefono, total_dispositivos) 
         VALUES ($new_id, $userId, '$tipo_dispositivo', '$tipo_condicion', CURDATE(), '$imperfecciones', '$telefono', '$cantidad')";
 
 if ($conn->query($sql) === TRUE) {

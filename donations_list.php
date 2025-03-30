@@ -20,10 +20,10 @@ if (isset($_GET['action'])) {
 
 // Obtenemos los datos de la base de datos
 $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS tipo, e.nombre AS estado, d.fecha, d.imperfecciones, d.telefono, d.total_dispositivos
-                        FROM Donaciones d
-                        JOIN Usuarios u ON d.id_usuario = u.id_usuario
-                        JOIN Tipo_Electrodomestico t ON d.id_tipo_electrodomestico = t.id_tipo_electrodomestico
-                        JOIN Estado_Dispositivo e ON d.id_estado_dispositivo = e.id_estado_dispositivo
+                        FROM donaciones d
+                        JOIN usuarios u ON d.id_usuario = u.id_usuario
+                        JOIN tipo_electrodomestico t ON d.id_tipo_electrodomestico = t.id_tipo_electrodomestico
+                        JOIN estado_dispositivo e ON d.id_estado_dispositivo = e.id_estado_dispositivo
                         ORDER BY d.id_donacion ASC");
 ?>
 <!DOCTYPE html>
@@ -379,13 +379,13 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
     }
   </style>
 </head>
-<li><a class="nav-link scrollto" href="index.html" onclick="return confirm('¿Estás seguro de que deseas cerrar sesión?')">Cerrar sesión</a></li>
+
 <body>
 <header id="header" class="fixed-top" style="background-color: #333; color: #fff;">
   <div class="container d-flex align-items-center justify-content-between">
     <div class="logo-container d-flex align-items-center">
       <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
-      <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+      <h1 class="logo"><a href="#" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
       <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
     </div>
     

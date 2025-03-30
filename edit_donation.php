@@ -260,14 +260,14 @@
     <div class="container d-flex align-items-center justify-content-between">
       <div class="logo-container d-flex align-items-center">
         <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
-        <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+        <h1 class="logo"><a href="#" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
         <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
       </div>
       
       <nav id="navbar" class="navbar">
         <ul>
           <li>
-            <a class="nav-link" href="index.html" style="color: #fff;">
+            <a class="nav-link" href="donations_list.php" style="color: #fff;">
               <span class="nav-icon"><i class="bi bi-house-door" style="color: #5cb874; font-size: 30px"></i></span>
               <span class="nav-text"  href="donations_list.php" style="font-size: 30px; padding-left: 10px">Atrás</span>
             </a>
@@ -293,14 +293,14 @@
       $id = intval($_GET['id']);
 
       // Consultar donación
-      $result = $conn->query("SELECT * FROM Donaciones WHERE id_donacion = $id");
+      $result = $conn->query("SELECT * FROM donaciones WHERE id_donacion = $id");
       $donation = $result->fetch_assoc();
 
       // Consultar tipos de dispositivos
-      $types = $conn->query("SELECT id_tipo_electrodomestico, nombre FROM Tipo_Electrodomestico");
+      $types = $conn->query("SELECT id_tipo_electrodomestico, nombre FROM tipo_electrodomestico");
 
       // Consultar estados de dispositivos
-      $states = $conn->query("SELECT id_estado_dispositivo, nombre FROM Estado_Dispositivo");
+      $states = $conn->query("SELECT id_estado_dispositivo, nombre FROM estado_dispositivo");
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Actualizar donación
@@ -310,7 +310,7 @@
         $telefono = $_POST['telefono'];
         $cantidad = intval($_POST['cantidad']);
 
-        $conn->query("UPDATE Donaciones SET 
+        $conn->query("UPDATE donaciones SET 
           id_tipo_electrodomestico = $tipo_dispositivo, 
           id_estado_dispositivo = $tipo_condicion, 
           imperfecciones = '$imperfecciones', 
