@@ -94,6 +94,7 @@
     /* Form Styling */
     .contact {
       padding: 60px 0;
+      margin-top: 70px;
     }
     
     .section-title {
@@ -346,31 +347,28 @@
   </script>
 </head>
 <body>
-  <header id="header" class="fixed-top">
+<header id="header" class="fixed-top" style="background-color: #333; color: #fff;">
     <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="index_inicio.html">EcoReboot</a></h1>
+      <div class="logo-container d-flex align-items-center">
+        <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
+        <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+        <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
+      </div>
+      
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="index_inicio.html">Inicio</a></li>
+          <li>
+            <a class="nav-link" href="index.html" style="color: #fff;">
+              <span class="nav-icon"><i class="bi bi-house-door" style="color: #5cb874; font-size: 30px"></i></span>
+              <span class="nav-text" style="font-size: 30px; padding-left: 10px">Inicio</span>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="index.html" style="font-size: 30px;">EcoReboot</a></h1>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
-          <li><a class="nav-link scrollto" href="#about">Informacion</a></li>
-          <li><a class="nav-link scrollto" href="donar.php">Donar dispositivo</a></li>
-          <li><a class="nav-link scrollto" href="index.html" onclick="return confirm('¿Estás seguro de que deseas cerrar sesión?')">Cerrar sesión</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-    </div>
-  </header><!-- End Header -->
+  
 
   <section id="contact" class="contact">
     <div class="container">

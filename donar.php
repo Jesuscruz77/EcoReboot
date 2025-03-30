@@ -287,17 +287,29 @@
     }
   </script>
 </head>
+
 <body>
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="index_inicio.html">EcoReboot</a></h1>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="index_inicio.html">Inicio</a></li>
-        </ul>
-      </nav>
+<header id="header" class="fixed-top" style="background-color: #333; color: #fff;">
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="logo-container d-flex align-items-center">
+      <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
+      <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+      <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
     </div>
-  </header>
+    
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li>
+          <a class="nav-link" href="index_inicio.html" style="color: #fff;">
+            <span class="nav-icon"><i class="bi bi-house-door" style="color: #5cb874; font-size: 30px"></i></span>
+            <span class="nav-text" style="font-size: 30px; padding-left: 10px">Atras</span>
+            
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
   <section id="hero" class="d-flex align-items-center" style="background-color: var(--secondary-color); padding: 100px 0 40px 0;">
     <div class="container">

@@ -36,11 +36,25 @@
     
     /* Header Styling */
     #header {
-      transition: all 0.5s;
-      z-index: 997;
-      padding: 15px 0;
-      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-      background-color: var(--secondary-color);
+   background-color: #333; /* Fondo oscuro */
+   color: #fff;
+   font-family: "Raleway", sans-serif;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 20px;
+   border-bottom: 2px solid #5cb874; /* Línea verde para estilo */
+    }
+
+    #header a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 14px;
+    }
+
+    #header a:hover {
+      color: #5cb874; /* Color destacado al pasar */
     }
     
     .logo {
@@ -416,27 +430,25 @@
   </style>
 </head>
 <body>
-<header id="header" class="fixed-top">
+<header id="header" class="fixed-top" style="background-color: #333; color: #fff;">
   <div class="container d-flex align-items-center justify-content-between">
     <div class="logo-container d-flex align-items-center">
-      <i class="bi bi-recycle logo-icon me-2"></i>
-      <h1 class="logo"><a href="index_inicio.html">EcoReboot</a></h1>
-      <div class="logo-divider"></div>
+      <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
+      <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+      <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
     </div>
     
     <nav id="navbar" class="navbar">
       <ul>
         <li>
-          <a class="nav-link" href="index_inicio.html">
-            <span class="nav-icon"><i class="bi bi-house-door"></i></span>
-            <span class="nav-text">Inicio</span>
+          <a class="nav-link" href="index.html" style="color: #fff;">
+            <span class="nav-icon"><i class="bi bi-house-door" style="color: #5cb874; font-size: 30px"></i></span>
+            <span class="nav-text" style="font-size: 30px; padding-left: 10px">Inicio</span>
           </a>
         </li>
       </ul>
     </nav>
   </div>
-  
-  <div class="header-wave"></div>
 </header>
 
   <!-- Hero Section -->

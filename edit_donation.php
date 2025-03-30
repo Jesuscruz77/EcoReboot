@@ -254,13 +254,24 @@
     }
   </script>
 </head>
+
 <body>
-  <header id="header" class="fixed-top">
+<header id="header" class="fixed-top" style="background-color: #333; color: #fff;">
     <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo"><a href="index_inicio.html">EcoReboot</a></h1>
+      <div class="logo-container d-flex align-items-center">
+        <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
+        <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+        <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
+      </div>
+      
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="donations_list.php"><i class="bi bi-arrow-left me-2"></i>Atrás</a></li>
+          <li>
+            <a class="nav-link" href="index.html" style="color: #fff;">
+              <span class="nav-icon"><i class="bi bi-house-door" style="color: #5cb874; font-size: 30px"></i></span>
+              <span class="nav-text"  href="donations_list.php" style="font-size: 30px; padding-left: 10px">Atrás</span>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>

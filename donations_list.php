@@ -379,19 +379,28 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
     }
   </style>
 </head>
+<li><a class="nav-link scrollto" href="index.html" onclick="return confirm('¿Estás seguro de que deseas cerrar sesión?')">Cerrar sesión</a></li>
 <body>
-  <header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto"><a href="index_inicio.html">EcoReboot</a></h1>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto" href="index.html" onclick="return confirm('¿Estás seguro de que deseas cerrar sesión?')">Cerrar sesión</a></li>
-          <li><a class="nav-link scrollto active" href="donations_list.php">Donaciones</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
+<header id="header" class="fixed-top" style="background-color: #333; color: #fff;">
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="logo-container d-flex align-items-center">
+      <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
+      <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+      <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
     </div>
-  </header>
+    
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li>
+          <a class="nav-link" href="index.html" style="color: #fff;">
+            <span class="nav-icon"><i class="bi bi-house-door" style="color: #5cb874; font-size: 30px"></i></span>
+            <span class="nav-text" style="font-size: 30px; padding-left: 10px"href="index.html" onclick="return confirm('¿Estás seguro de que deseas cerrar sesión?')">Cerrar sesión</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
   <section id="donations" class="donations">
     <div class="container">
