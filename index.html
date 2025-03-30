@@ -29,18 +29,28 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <style>
-    #header {
-      background-color: #ffffff;
-      /* Cambia el color según tu diseño */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      /* Opcional: agrega sombra para destacar */
-      z-index: 1000;
-      /* Asegúrate de que esté por encima del contenido */
-      position: fixed;
-      /* Fija la barra de navegación en la parte superior */
-      width: 100%;
-      /* Asegúrate de que ocupe todo el ancho */
-    }
+  #header {
+  transition: all 0.5s;
+  z-index: 1000;
+  padding: 15px 0;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  background-color: #333333; /* Gris oscuro */
+  color: #ffffff; /* Texto en blanco */
+  position: fixed;
+  width: 100%;
+}
+
+/* Cambia el color de los enlaces cuando se seleccionan */
+#header a {
+  color: #ffffff; /* Blanco por defecto */
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+#header a:hover,
+#header a:focus {
+  color: #00ff00; /* Verde al resaltar */
+}
 
     /* Estilos generales */
     h1.logo {

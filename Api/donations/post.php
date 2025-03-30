@@ -7,7 +7,7 @@ include '../../db.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$stmt = $conn->prepare("INSERT INTO Donaciones 
+$stmt = $conn->prepare("INSERT INTO donaciones 
     (id_usuario, id_tipo_electrodomestico, id_estado_dispositivo, fecha, imperfecciones, telefono, total_dispositivos)
     VALUES (?, ?, ?, ?, ?, ?, ?)");
 

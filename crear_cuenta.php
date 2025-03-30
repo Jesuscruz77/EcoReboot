@@ -181,9 +181,9 @@
     
     /* Footer */
     #footer {
-      background: var(--secondary-color);
+      background: black !important;
       padding: 20px 0;
-      color: var(--text-color);
+      color: white;
       font-size: 14px;
       text-align: center;
     }
@@ -351,7 +351,7 @@
     <div class="container d-flex align-items-center justify-content-between">
       <div class="logo-container d-flex align-items-center">
         <i class="bi bi-recycle logo-icon me-2" style="color: #5cb874; font-size: 40px"></i>
-        <h1 class="logo"><a href="index_inicio.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
+        <h1 class="logo"><a href="index.html" style="color: #fff; font-size: 30px;">EcoReboot</a></h1>
         <div class="logo-divider" style="border-left: 2px solid #5cb874; font-size: 30px"></div>
       </div>
       

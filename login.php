@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Preparar la consulta SQL para evitar inyecciones SQL
-    $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE nombre = ? AND contraseña = ?");
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE nombre = ? AND contraseña = ?");
     $stmt->bind_param("ss", $email, $password);
 
     // Ejecutar la consulta
