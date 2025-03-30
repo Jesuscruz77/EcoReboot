@@ -39,11 +39,25 @@
     
     /* Header Styling */
     #header {
-      transition: all 0.5s;
-      z-index: 997;
-      padding: 15px 0;
-      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-      background-color: var(--secondary-color);
+    background-color: #333; /* Fondo oscuro */
+    color: #fff;
+    font-family: "Raleway", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 2px solid #5cb874; /* Línea verde para estilo */
+    }
+
+      #header a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+        font-size: 14px;
+    }
+
+    #header a:hover {
+      color: #5cb874; /* Color destacado al pasar */
     }
     
     .logo {
@@ -136,7 +150,7 @@
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">EcoReboot</a></h1>
+      <h1 class="logo me-auto"><a href="index.html" style="font-size: 30px;">EcoReboot</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -174,7 +188,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero">
+  <section id="hero" style="height: 90vh;">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
@@ -185,7 +199,7 @@
         <div class="carousel-item active" style="background-image: url(assets/img/header1.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">Bienvenido a  <span>EcoReboot</span></h2>
+              <h2 class="animate__animated animate__fadeInDown" style="font-size: 30px;">Bienvenido a  <span>EcoReboot</span></h2>
               <p class="animate__animated animate__fadeInUp">En la actualidad nos enfrentamos a diversos problemas en la generación de residuos
                 electrónicos, esto debido a que algunos equipos electrónicos dejan de funcionar y por tal
                 motivo lo desechan generando contaminación. </p>
@@ -199,7 +213,7 @@
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">Bienvenido a  <span>EcoReboot</span></h2>
-              <p class="animate__animated animate__fadeInUp">Según el último informe del Programa de Naciones Unidas para el Medio Ambiente (PNUMA), en el
+              <p class="animate__animated animate__fadeInUp" style="font-size: 30px;">Según el último informe del Programa de Naciones Unidas para el Medio Ambiente (PNUMA), en el
                 mundo se generan 40 millones de toneladas de residuos electrónicos al año. Este volumen de chatarra
                 electrónica está creciendo entre un 16% y un 28% cada cinco años, lo que triplica la cantidad de basura
                 doméstica.</p>
@@ -213,7 +227,7 @@
           <div class="carousel-container">
             <div class="container">
               <h2 class="animate__animated animate__fadeInDown">Bienvenido a  <span>EcoReboot</span></h2>
-              <p class="animate__animated animate__fadeInUp">Únete a esta iniciativa y comienza donando!</p>
+              <p class="animate__animated animate__fadeInUp" style="font-size: 30px;">Únete a esta iniciativa y comienza donando!</p>
               <a href="inicio_sesion.php" class="btn-get-started animate__animated animate__fadeInUp scrollto">Más</a>
             </div>
           </div>

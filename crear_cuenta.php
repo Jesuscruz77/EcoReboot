@@ -357,16 +357,20 @@
     </div>
   </header>
 
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Únete a EcoReboot</h1>
-          <h2>Crea tu cuenta para empezar a donar dispositivos</h2>
-        </div>
-      </div>
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo"><a href="index.html" style="font-size: 30px;">EcoReboot</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Inicio</a></li>
+          <li><a class="nav-link scrollto" href="#about">Informacion</a></li>
+          <li><a class="nav-link scrollto" href="donar.php">Donar dispositivo</a></li>
+          <li><a class="nav-link scrollto" href="index.html" onclick="return confirm('¿Estás seguro de que deseas cerrar sesión?')">Cerrar sesión</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
     </div>
-  </section>
+  </header><!-- End Header -->
 
   <section id="contact" class="contact">
     <div class="container">
