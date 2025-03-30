@@ -7,7 +7,7 @@ include '../../db.php';
 
 $id = $_GET['id'] ?? 0;
 
-$stmt = $conn->prepare("DELETE FROM Donaciones WHERE id_donacion = ?");
+$stmt = $conn->prepare("DELETE FROM donaciones WHERE id_donacion = ?");
 $stmt->bind_param("i", $id);
 $success = $stmt->execute();
 

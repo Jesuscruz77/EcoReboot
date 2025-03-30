@@ -5,7 +5,7 @@ include '../../db.php';
 
 $id = $_GET['id'] ?? 0;
 
-$stmt = $conn->prepare("SELECT * FROM Donaciones WHERE id_donacion = ?");
+$stmt = $conn->prepare("SELECT * FROM donaciones WHERE id_donacion = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 
