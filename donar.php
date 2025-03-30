@@ -310,20 +310,8 @@
     </nav>
   </div>
 </header>
-
-  <section id="hero" class="d-flex align-items-center" style="background-color: var(--secondary-color); padding: 100px 0 40px 0;">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Dale una segunda vida a tus dispositivos</h1>
-          <h2>Tu donación ayuda al planeta y a quienes más lo necesitan</h2>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-  
+ 
+<br><br>
 
   <section id="contact" class="contact">
     <div class="container">
