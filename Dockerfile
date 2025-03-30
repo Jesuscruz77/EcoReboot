@@ -10,5 +10,5 @@ COPY default.conf /etc/apache2/sites-available/000-default.conf
 # Instalar las extensiones necesarias
 RUN docker-php-ext-install mysqli
 
-# Exponer el puerto 80
+# Exponer el puerto 80
 EXPOSE 80

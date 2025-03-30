@@ -1,0 +1,12 @@
+{
+    "require": {
+        "zircote/swagger-php": "^4.8",
+        "vlucas/phpdotenv": "^5.6",
+        "ext-mysqli": "*",
+        "ext-json": "*"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
