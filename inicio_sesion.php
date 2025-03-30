@@ -12,6 +12,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
   <style>
+    
+
     :root {
       --primary-color: #4caf50;
       --primary-light: #80e27e;
@@ -260,21 +262,138 @@
       text-decoration: underline;
     }
     
-    /* Hero section */
+    /* Hero Section Enhancements */
+    /* Añade estas personalizaciones de color */
+    :root {
+      --bs-primary: #4caf50; /* Verde principal */
+      --bs-primary-rgb: 76, 175, 80;
+      --bs-primary-dark: #087f23; /* Verde oscuro */
+    }
+
+    .bg-primary-light {
+      background-color: #d4edda !important; /* Tono claro del verde */
+    }
+
+    .text-primary {
+      color: var(--bs-primary) !important;
+    }
+
+    .text-primary-dark {
+      color: var(--bs-primary-dark) !important;
+    }
+
+    .btn-primary {
+      background-color: var(--bs-primary);
+      border-color: var(--bs-primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--bs-primary-dark);
+      border-color: var(--bs-primary-dark);
+    }
+
+    .btn-outline-primary {
+      color: var(--bs-primary);
+      border-color: var(--bs-primary);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--bs-primary);
+      border-color: var(--bs-primary);
+      color: white;
+    }
     #hero {
-      background-color: var(--secondary-color);
-      padding: 100px 0 40px 0;
+      background: linear-gradient(135deg, rgba(223, 239, 231, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%),
+                  url('assets/img/electronics-bg.jpg') center center/cover;
+      padding: 160px 0 80px;
+      position: relative;
+      overflow: hidden;
     }
-    
-    #hero h1 {
-      font-size: 2.5rem;
-      color: var(--primary-dark);
-      margin-bottom: 15px;
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
-    
-    #hero h2 {
-      font-size: 1.5rem;
-      color: var(--text-color);
+
+    .title-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .title-divider .line {
+      width: 60px;
+      height: 2px;
+      background: var(--primary-color);
+    }
+
+    .title-divider i {
+      font-size: 1.8rem;
+    }
+
+    .hero-image-container {
+      max-width: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      transform: perspective(1000px) rotateY(-10deg);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image-container:hover {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+
+    .gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(76, 175, 80, 0.1) 0%, rgba(223, 239, 231, 0.05) 100%);
+    }
+
+    .animated-img {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @media (max-width: 992px) {
+      #hero {
+        padding: 100px 0 60px;
+        text-align: center;
+      }
+      
+      .hero-image-container {
+        margin-top: 40px;
+        transform: none;
+        max-width: 300px;
+      }
+      
+      .title-divider {
+        justify-content: center;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      #hero p {
+        font-size: 1.1rem;
+      }
     }
     
     /* Error message styling */
@@ -297,23 +416,62 @@
   </style>
 </head>
 <body>
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center justify-content-between">
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="logo-container d-flex align-items-center">
+      <i class="bi bi-recycle logo-icon me-2"></i>
       <h1 class="logo"><a href="index_inicio.html">EcoReboot</a></h1>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="index_inicio.html">Inicio</a></li>
-        </ul>
-      </nav>
+      <div class="logo-divider"></div>
     </div>
-  </header>
+    
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li>
+          <a class="nav-link" href="index_inicio.html">
+            <span class="nav-icon"><i class="bi bi-house-door"></i></span>
+            <span class="nav-text">Inicio</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="header-wave"></div>
+</header>
 
+  <!-- Hero Section -->
   <section id="hero" class="d-flex align-items-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Bienvenido a EcoReboot</h1>
-          <h2>Inicia sesión para gestionar tus donaciones</h2>
+    <div class="container position-relative">
+      <div class="row gy-5">
+        <div class="col-lg-7 d-flex flex-column justify-content-center text-center text-lg-start">
+          <div class="hero-content">
+            <div class="badge-container mb-4">
+              <span class="badge bg-primary-light text-primary-dark rounded-pill px-4 py-2">
+                <i class="bi bi-recycle me-2"></i>Gestión Responsable
+              </span>
+            </div>
+            <h1 class="display-4 fw-bold mb-4">Bienvenido a <span class="text-primary-dark">EcoReboot</span></h1>
+            <div class="title-divider mb-4">
+              <div class="line"></div>
+              <i class="bi bi-cpu-fill text-primary"></i>
+              <div class="line"></div>
+            </div>
+            <p class="lead mb-5">Accede a tu cuenta para gestionar donaciones, seguir el proceso de reciclaje y contribuir a un futuro tecnológico sostenible.</p>
+            <div class="hero-cta d-flex gap-3 justify-content-center justify-content-lg-start">
+              <a href="#contact" class="btn btn-primary btn-lg px-5">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+              </a>
+              <a href="crear_cuenta.php" class="btn btn-outline-primary btn-lg px-4">
+                <i class="bi bi-person-plus me-2"></i>Crear Cuenta
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 d-flex align-items-center justify-content-center">
+          <div class="hero-image-container position-relative">
+            <img src="assets/img/logo.jpg" alt="Ilustración reciclaje electrónico" class="img-fluid animated-img">
+            <div class="gradient-overlay"></div>
+          </div>
         </div>
       </div>
     </div>
