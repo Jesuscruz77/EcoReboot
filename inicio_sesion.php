@@ -196,9 +196,9 @@
     
     /* Footer */
     #footer {
-      background: var(--secondary-color);
+      background: black !important;
       padding: 20px 0;
-      color: var(--text-color);
+      color: white;
       font-size: 14px;
       text-align: center;
     }
