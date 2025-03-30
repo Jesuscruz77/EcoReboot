@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Insertar usuario en la base de datos
-    $sql = "INSERT INTO Usuarios (nombre, telefono, correo, contraseña, id_rol_usuario) VALUES ('$username', '$phone', '$email', '$password', '2')";
+    $sql = "INSERT INTO Usuarios (nombre, telefono, correo, contraseña, id_rol_usuario) VALUES ('$username', '$phone', '$email', '$password', '3')";
     //echo "Consulta SQL: $sql<br>";
 
     if ($conn->query($sql) === TRUE) {
