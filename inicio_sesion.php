@@ -452,7 +452,7 @@
 </header>
 
   <!-- Hero Section -->
-  <section id="hero" class="d-flex align-items-center">
+  <section id="hero" class="d-flex align-items-center" >
     <div class="container position-relative">
       <div class="row gy-5">
         <div class="col-lg-7 d-flex flex-column justify-content-center text-center text-lg-start">

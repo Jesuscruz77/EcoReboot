@@ -8,7 +8,7 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
     if ($action == 'delete') {
         $id = intval($_GET['id']);
-        $conn->query("DELETE FROM Donaciones WHERE id_donacion = $id");
+        $conn->query("DELETE FROM donaciones WHERE id_donacion = $id");
         // Guardamos el mensaje en una variable para mostrarlo después
         $mensaje = '<div class="alert alert-success">¡Donación eliminada con éxito!</div>';
     } elseif ($action == 'edit') {
