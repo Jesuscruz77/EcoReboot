@@ -415,7 +415,7 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
         <button class="btn btn-success" onclick="exportExcel()">
           <i class="bi bi-file-spreadsheet"></i> Exportar Excel
         </button>
-        <a href="api_docs.html" target="_blank" class="btn btn-info">
+        <a href="http://localhost:8082/" target="_blank" class="btn btn-info">
           <i class="bi bi-code-square"></i> Ver API Docs
         </a>
       </div>

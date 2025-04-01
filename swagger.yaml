@@ -3,9 +3,9 @@ info:
   title: API de Donaciones - EcoReboot
   version: 1.0.0
 servers:
-  - url: http://localhost/Ecoreboot/api/donations
-    description: Servidor local de desarrollo
-
+  - url: "http://localhost:8080/api/donations"
+    description: Servidor Docker
+    
 paths:
   /get.php:
     get:

@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./Ecoreboot:/var/www/html/Ecoreboot
+      - .:/var/www/html
     depends_on:
       - db
 
@@ -20,7 +20,7 @@ services:
       - ./ecoreboot.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
-  # Añade esto en docker-compose.yml
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
@@ -29,21 +29,15 @@ services:
       PMA_ARBITRARY: 1
     depends_on:
       - db
-  swagger-ui:
+
+  swagger:
     image: swaggerapi/swagger-ui
-    container_name: ecoreboot_swagger
     ports:
       - "8082:8080"
-    volumes:
-      # Mapear la carpeta local 'Api' a una carpeta dentro del contenedor
-      - ./Api:/usr/share/nginx/html/Api
     environment:
-      # Indica la ruta interna donde Swagger UI buscará tu swagger.json
-      # ¡Ojo con mayúsculas y minúsculas!
-      SWAGGER_JSON: /swagger.yaml
-    depends_on:
-      - web
-
+      - SWAGGER_JSON=/swagger/swagger.yaml
+    volumes:
+      - ./swagger.yaml:/swagger/swagger.yaml:ro
 
 volumes:
   db_data:
