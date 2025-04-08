@@ -8,7 +8,7 @@ from sqlalchemy import select
 from datetime import datetime
 
 # Configuración de la base de datos (según tu db.php)
-DATABASE_URL = "mysql+asyncmy://root:@localhost/ecoreboot"
+DATABASE_URL = "mysql+asyncmy://root:@db/ecoreboot"  # ✔️ "db" es el nombre del servicio en docker-compose
 database = databases.Database(DATABASE_URL)
 metadata = sqlalchemy.MetaData()
 
@@ -387,3 +387,5 @@ async def crear_donacion_por_usuario(usuario_id: int, datos: DonacionByUserCreat
     )
     new_id = await database.execute(insert_query)
     return await obtener_donacion(new_id)
+
+

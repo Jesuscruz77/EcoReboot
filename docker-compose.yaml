@@ -30,17 +30,18 @@ services:
     depends_on:
       - db
 
-  fastapi:  # Nuevo servicio para FastAPI
-    build: ./fastapi  # Ruta al Dockerfile de FastAPI
+  fastapi:
+    build: ./fastapi
     ports:
-      - "8000:8000"
+      - "8000:8000"  # Mapea el puerto 8000
     environment:
-      - DB_HOST=db
+      - DB_HOST=db  # Nombre del servicio MySQL
       - DB_USER=root
-      - DB_PASSWORD=
+      - DB_PASSWORD=  # Contraseña vacía según tu configuración
       - DB_NAME=ecoreboot
     depends_on:
-      - db
+      - db  # Espera a que la base de datos esté lista
+
 
 volumes:
   db_data:

@@ -1,0 +1,5 @@
+fastapi>=0.68.0
+uvicorn>=0.15.0
+databases[mysql]>=0.6.0  # Módulo faltante
+sqlalchemy>=1.4.0        # Requerido para ORM
+asyncmy>=0.2.0           # Driver asíncrono para MySQL

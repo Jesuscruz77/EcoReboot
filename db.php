@@ -1,13 +1,11 @@
 <?php
-    $servername = "localhost";
+    $servername = "db";  // Nombre del servicio en docker-compose
     $username = "root";
-    $password = "";  // Cambia esto a tu contraseña de MySQL
+    $password = "";       // Contraseña vacía según MYSQL_ALLOW_EMPTY_PASSWORD
     $dbname = "ecoreboot";
 
-    // Crear conexión
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verificar conexión
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
     }
