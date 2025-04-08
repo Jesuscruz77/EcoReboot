@@ -23,7 +23,7 @@ $result = $conn->query("SELECT u.id_usuario, u.nombre, u.telefono, u.correo,
                         r.nombre as rol, u.id_rol_usuario
                         FROM usuarios u
                         JOIN rol_usuarios r ON u.id_rol_usuario = r.id_rol_usuario
-                        ORDER BY u.id_usuario ASC");
+                        ORDER BY u.id_usuario ASC"); 
 ?>
 <!DOCTYPE html>
 <html lang="en">

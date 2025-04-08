@@ -1,5 +1,5 @@
 <?php
-    $servername = "db";
+    $servername = "localhost";
     $username = "root";
     $password = "";  // Cambia esto a tu contraseña de MySQL
     $dbname = "ecoreboot";
