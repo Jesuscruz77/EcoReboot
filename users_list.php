@@ -8,30 +8,29 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
     if ($action == 'delete') {
         $id = intval($_GET['id']);
-        $conn->query("DELETE FROM donaciones WHERE id_donacion = $id");
+        $conn->query("DELETE FROM usuarios WHERE id_usuario = $id");
         // Guardamos el mensaje en una variable para mostrarlo después
-        $mensaje = '<div class="alert alert-success">¡Donación eliminada con éxito!</div>';
+        $mensaje = '<div class="alert alert-success">¡Usuario eliminado con éxito!</div>';
     } elseif ($action == 'edit') {
         $id = intval($_GET['id']);
-        header("Location: edit_donation.php?id=$id");
+        header("Location: edit_user.php?id=$id");
         exit(); // Importante: terminamos la ejecución aquí
     }
 }
 
 // Obtenemos los datos de la base de datos
-$result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS tipo, t.id_tipo_electrodomestico, e.nombre AS estado, e.id_estado_dispositivo, d.fecha, d.imperfecciones, d.telefono, d.total_dispositivos
-                        FROM donaciones d
-                        JOIN usuarios u ON d.id_usuario = u.id_usuario
-                        JOIN tipo_electrodomestico t ON d.id_tipo_electrodomestico = t.id_tipo_electrodomestico
-                        JOIN estado_dispositivo e ON d.id_estado_dispositivo = e.id_estado_dispositivo
-                        ORDER BY d.id_donacion ASC");
+$result = $conn->query("SELECT u.id_usuario, u.nombre, u.telefono, u.correo, 
+                        r.nombre as rol, u.id_rol_usuario
+                        FROM usuarios u
+                        JOIN rol_usuarios r ON u.id_rol_usuario = r.id_rol_usuario
+                        ORDER BY u.id_usuario ASC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>EcoReboot - Lista de Donaciones</title>
+  <title>EcoReboot - Lista de Usuarios</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <link href="assets/img/logo.ico" rel="icon">
@@ -129,7 +128,7 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
     }
     
     /* Section Styling */
-    .donations {
+    .users {
       padding: 60px 0;
     }
     
@@ -433,55 +432,39 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
   </div>
 </header>
 
-  <section id="donations" class="donations">
+  <section id="users" class="users">
     <div class="container">
       <div class="section-title">
-        <h2>Lista de Donaciones</h2>
+        <h2>Lista de Usuarios</h2>
       </div>
 
       <div class="export-buttons">
-        <button class="btn btn-success" onclick="exportPDF()">
+        <!--<button class="btn btn-success" onclick="exportPDF()">
           <i class="bi bi-file-pdf"></i> Exportar PDF
         </button>
         <button class="btn btn-success" onclick="exportExcel()">
           <i class="bi bi-file-spreadsheet"></i> Exportar Excel
-        </button>
-        <a href="http://localhost:8082/" target="_blank" class="btn btn-info">
-          <i class="bi bi-code-square"></i> Ver API Docs
+        </button> -->
+        <a href="donations_list.php" class="btn btn-warning">
+            <i class="bi bi-recycle"></i> Ver Donaciones
         </a>
         <div class="dropdown d-inline-block">
-          <button class="btn btn-warning dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-funnel"></i> Filtrar Dispositivos
+          <button class="btn btn-info dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-funnel"></i> Filtrar Usuarios
           </button>
           <div class="dropdown-menu p-3" aria-labelledby="filterDropdown" style="min-width: 300px;">
             <form id="filterForm">
               <div class="mb-3">
-                <label for="filterType" class="form-label">Tipo de dispositivo</label>
-                <select class="form-select" id="filterType">
-                  <option value="">Todos los tipos</option>
+                <label for="filterRole" class="form-label">Rol de usuario</label>
+                <select class="form-select" id="filterRole">
+                  <option value="">Todos los roles</option>
                   <?php
-                  $types = $conn->query("SELECT * FROM tipo_electrodomestico");
-                  while ($type = $types->fetch_assoc()) {
-                    echo '<option value="'.$type['id_tipo_electrodomestico'].'">'.$type['nombre'].'</option>';
+                  $roles = $conn->query("SELECT * FROM rol_usuarios");
+                  while ($role = $roles->fetch_assoc()) {
+                    echo '<option value="'.$role['id_rol_usuario'].'">'.$role['nombre'].'</option>';
                   }
                   ?>
                 </select>
-              </div>
-              <div class="mb-3">
-                <label for="filterStatus" class="form-label">Estado</label>
-                <select class="form-select" id="filterStatus">
-                  <option value="">Todos los estados</option>
-                  <?php
-                  $statuses = $conn->query("SELECT * FROM estado_dispositivo");
-                  while ($status = $statuses->fetch_assoc()) {
-                    echo '<option value="'.$status['id_estado_dispositivo'].'">'.$status['nombre'].'</option>';
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="filterDate" class="form-label">Fecha</label>
-                <input type="date" class="form-control" id="filterDate">
               </div>
               <div class="d-flex justify-content-between">
                 <button type="button" class="btn btn-primary btn-sm" onclick="applyFilters()">
@@ -494,9 +477,6 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
             </form>
           </div>
         </div>
-        <a href="users_list.php"  class="btn btn-warning">
-          <i class="bi bi-person"></i> Ver Usuarios
-        </a>
       </div>
 
       <div class="table-container">
@@ -508,49 +488,24 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
 
         if ($result->num_rows > 0) {
             echo '<div class="table-responsive">';
-            echo '<table class="table table-striped table-hover" id="donationsTable">';
-            echo '<thead><tr><th>ID</th><th>Usuario</th><th>Tipo</th><th>Estado</th><th>Fecha</th><th>Imperfecciones</th><th>Teléfono</th><th>Cantidad</th><th>Acciones</th></tr></thead>';
+            echo '<table class="table table-striped table-hover" id="usersTable">';
+            echo '<thead><tr><th>ID</th><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Rol</th></tr></thead>';
             echo '<tbody>';
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>'.$row['id_donacion'].'</td>';
-                echo '<td>'.$row['usuario'].'</td>';
-                echo '<td data-type-id="'.$row['id_tipo_electrodomestico'].'">'.$row['tipo'].'</td>';
-                echo '<td data-status-id="'.$row['id_estado_dispositivo'].'">'.$row['estado'].'</td>';
-                echo '<td data-date="'.substr($row['fecha'], 0, 10).'">'.$row['fecha'].'</td>';
-                echo '<td>'.$row['imperfecciones'].'</td>';
+                echo '<td>'.$row['id_usuario'].'</td>';
+                echo '<td>'.$row['nombre'].'</td>';
                 echo '<td>'.$row['telefono'].'</td>';
-                echo '<td>'.$row['total_dispositivos'].'</td>';
-                echo '<td>
-                        <div class="d-flex flex-wrap gap-2">
-                          <a href="?action=edit&id='.$row['id_donacion'].'" class="btn btn-success btn-sm" onclick="return confirm(\'¿Editar esta donación?\')">
-                            <i class="bi bi-pencil"></i> Editar
-                          </a>
-                          <a href="?action=delete&id='.$row['id_donacion'].'" class="btn btn-danger btn-sm" onclick="return confirm(\'¿Eliminar esta donación?\')">
-                            <i class="bi bi-trash"></i> Eliminar
-                          </a>
-                          <div class="dropdown">
-                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="codeDropdown'.$row['id_donacion'].'" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="bi bi-upc-scan"></i> Código
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="codeDropdown'.$row['id_donacion'].'">
-                              <li><button class="dropdown-item" onclick="generarCodigoBarras('.$row['id_donacion'].', \''.$row['tipo'].'\', \''.$row['fecha'].'\')">
-                                <i class="bi bi-upc"></i> Código de Barras
-                              </button></li>
-                              <li><button class="dropdown-item" onclick="generarCodigoQR('.$row['id_donacion'].', \''.$row['tipo'].'\', \''.$row['fecha'].'\')">
-                                <i class="bi bi-qr-code"></i> Código QR
-                              </button></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </td>';
+                echo '<td>'.$row['correo'].'</td>';
+                echo '<td data-role-id="'.$row['id_rol_usuario'].'">'.$row['rol'].'</td>';
+                
                 echo '</tr>';
             }
             echo '</tbody>';
             echo '</table>';
             echo '</div>';
         } else {
-            echo '<div class="alert alert-info">No hay donaciones registradas.</div>';
+            echo '<div class="alert alert-info">No hay usuarios registrados.</div>';
         }
         ?>
       </div>
@@ -564,26 +519,6 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
       </div>
     </div>
   </footer>
-  <div class="modal fade" id="codeModal" tabindex="-1" aria-labelledby="codeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="codeModalLabel">Código</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body text-center">
-          <p id="codeInfo"></p>
-          <img id="codeImage" class="code-img" src="" alt="Código">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" onclick="printCode()">
-            <i class="bi bi-printer"></i> Imprimir
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <a href="#" class="back-to-top"><i class="bi bi-arrow-up-short"></i></a>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -592,73 +527,6 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
   <script src="assets/js/main.js"></script>
   
   <script>
-    // Funciones para generación de códigos
-    function generarCodigoBarras(id, tipo, fecha) {
-      let data = `ID:${id} | Tipo:${tipo} | Fecha:${fecha}`;
-      let url = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(data)}&code=Code128&translate-esc=on&dpi=96`;
-      mostrarCodigoEnModal(url, "Código de Barras", data);
-    }
-
-    function generarCodigoQR(id, tipo, fecha) {
-      let data = `ID:${id} | Tipo:${tipo} | Fecha:${fecha}`;
-      let url = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(data)}&code=QRCode&translate-esc=on&eclevel=L`;
-      mostrarCodigoEnModal(url, "Código QR", data);
-    }
-
-    function mostrarCodigoEnModal(url, titulo, info) {
-      document.getElementById("codeModalLabel").textContent = titulo;
-      document.getElementById("codeImage").src = url;
-      document.getElementById("codeInfo").textContent = info;
-      new bootstrap.Modal(document.getElementById('codeModal')).show();
-    }
-
-    function printCode() {
-      const codeImage = document.getElementById('codeImage').src;
-      const codeType = document.getElementById('codeModalLabel').textContent;
-      const codeInfo = document.getElementById('codeInfo').textContent;
-      
-      const printWindow = window.open('', '_blank');
-      printWindow.document.write(`
-        <html><head><title>${codeType} - EcoReboot</title>
-        <style>
-          body { 
-            text-align: center; 
-            font-family: 'Poppins', sans-serif;
-            padding: 20px;
-          } 
-          img { 
-            max-width: 100%; 
-            height: auto;
-            margin: 20px 0;
-          }
-          .info {
-            margin-bottom: 20px;
-            font-size: 16px;
-            color: #333;
-          }
-          .header {
-            margin-bottom: 30px;
-          }
-          .header h1 {
-            color: #087f23;
-            font-family: 'Raleway', sans-serif;
-          }
-        </style>
-        </head>
-        <body>
-          <div class="header">
-            <h1>EcoReboot</h1>
-            <h2>${codeType}</h2>
-          </div>
-          <div class="info">${codeInfo}</div>
-          <img src="${codeImage}">
-          <p>Generado el: ${new Date().toLocaleDateString()}</p>
-        </body></html>
-      `);
-      printWindow.document.close();
-      printWindow.print();
-    }
-
     // Funciones de exportación
     function exportPDF() {
       const { jsPDF } = window.jspdf;
@@ -671,7 +539,7 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
       doc.setFont('Raleway', 'normal');
       doc.setFontSize(20);
       doc.setTextColor(8, 127, 35); // Color primary-dark
-      doc.text('Lista de Donaciones - EcoReboot', 105, 15, { align: 'center' });
+      doc.text('Lista de Usuarios - EcoReboot', 105, 15, { align: 'center' });
       
       // Fecha de generación
       doc.setFont('Poppins', 'normal');
@@ -681,7 +549,7 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
       
       // Tabla de datos
       doc.autoTable({
-        html: '#donationsTable',
+        html: '#usersTable',
         startY: 30,
         theme: 'grid',
         headStyles: { 
@@ -709,54 +577,48 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
         }
       });
       
-      doc.save(`Donaciones_EcoReboot_${new Date().toISOString().slice(0,10)}.pdf`);
+      doc.save(`Usuarios_EcoReboot_${new Date().toISOString().slice(0,10)}.pdf`);
     }
 
     function exportExcel() {
-      const table = document.querySelector('#donationsTable');
+      const table = document.querySelector('#usersTable');
       const wb = XLSX.utils.table_to_book(table, { 
-        sheet: "Donaciones",
+        sheet: "Usuarios",
         raw: true
       });
       
       // Agregar título y fecha
-      XLSX.utils.sheet_add_aoa(wb.Sheets["Donaciones"], [
-        ["EcoReboot - Lista de Donaciones"],
+      XLSX.utils.sheet_add_aoa(wb.Sheets["Usuarios"], [
+        ["EcoReboot - Lista de Usuarios"],
         [`Generado el: ${new Date().toLocaleDateString()}`],
         [""] // Espacio en blanco
       ], { origin: "A1" });
       
       // Establecer anchos de columna
-      if (!wb.Sheets["Donaciones"]["!cols"]) wb.Sheets["Donaciones"]["!cols"] = [];
-      for (let i = 0; i < 9; i++) {
-        wb.Sheets["Donaciones"]["!cols"][i] = { wch: i === 0 ? 5 : (i === 8 ? 25 : 15) };
+      if (!wb.Sheets["Usuarios"]["!cols"]) wb.Sheets["Usuarios"]["!cols"] = [];
+      for (let i = 0; i < 6; i++) {
+        wb.Sheets["Usuarios"]["!cols"][i] = { wch: i === 0 ? 5 : (i === 5 ? 25 : 15) };
       }
       
-      XLSX.writeFile(wb, `Donaciones_EcoReboot_${new Date().toISOString().slice(0,10)}.xlsx`);
+      XLSX.writeFile(wb, `Usuarios_EcoReboot_${new Date().toISOString().slice(0,10)}.xlsx`);
     }
 
     // Funciones de filtrado
     function applyFilters() {
-      const type = document.getElementById('filterType').value;
-      const status = document.getElementById('filterStatus').value;
-      const date = document.getElementById('filterDate').value;
+      const role = document.getElementById('filterRole').value;
       
       // Ocultar todas las filas primero
-      document.querySelectorAll('#donationsTable tbody tr').forEach(row => {
+      document.querySelectorAll('#usersTable tbody tr').forEach(row => {
         row.style.display = 'none';
       });
       
       // Mostrar solo las filas que coincidan con los filtros
-      document.querySelectorAll('#donationsTable tbody tr').forEach(row => {
-        const rowType = row.cells[2].getAttribute('data-type-id') || '';
-        const rowStatus = row.cells[3].getAttribute('data-status-id') || '';
-        const rowDate = row.cells[4].getAttribute('data-date') || '';
+      document.querySelectorAll('#usersTable tbody tr').forEach(row => {
+        const rowRole = row.cells[4].getAttribute('data-role-id') || '';
         
-        const typeMatch = !type || rowType === type;
-        const statusMatch = !status || rowStatus === status;
-        const dateMatch = !date || rowDate === date;
+        const roleMatch = !role || rowRole === role;
         
-        if (typeMatch && statusMatch && dateMatch) {
+        if (roleMatch) {
           row.style.display = '';
         }
       });
@@ -767,12 +629,10 @@ $result = $conn->query("SELECT d.id_donacion, u.nombre AS usuario, t.nombre AS t
     }
 
     function resetFilters() {
-      document.getElementById('filterType').value = '';
-      document.getElementById('filterStatus').value = '';
-      document.getElementById('filterDate').value = '';
+      document.getElementById('filterRole').value = '';
       
       // Mostrar todas las filas
-      document.querySelectorAll('#donationsTable tbody tr').forEach(row => {
+      document.querySelectorAll('#usersTable tbody tr').forEach(row => {
         row.style.display = '';
       });
     }
